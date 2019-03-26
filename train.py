@@ -3,10 +3,9 @@ import tensorflow as tf
 
 ## Constants ##
 num_units = 3
-batch_size = 10
-timesteps = 7
-num_vocab = 20
-embed_dim = 10
+batch_size = 10 # 64
+timesteps = 7 # 30
+num_vocab = 20 # 20000
 ###############
 
 tf.reset_default_graph()

@@ -36,11 +36,11 @@ def preprocess(file):
         lines = f.readlines()
 
         # add <bos> and <eos> tags
-        lines = ("<bos> " + line.strip() + " <eos>\n" for line in lines)
+        lines = ('<bos> ' + line.strip() + ' <eos>\n' for line in lines)
         # remove lines with length greater than 30
         lines = (line for line in lines if len(line.split(' ')) <= 30)
         # pad short sentences to 30 tokens
-        lines = ((line.strip() + " <pad>" * (30 - len(line.split(' ')))
+        lines = ((line.strip() + ' <pad>' * (30 - len(line.split(' ')))
                 ).strip() + '\n' for line in lines)
 
     with open(file + '.proc.tmp', 'w+') as f:
@@ -60,6 +60,10 @@ def tokenize():
     word_2_idx = {w:i+1 for i, w in enumerate(keeps)}
     idx_2_word = {i+1:w for i, w in enumerate(keeps)}
 
+    # mapping for token <unk>
+    word_2_idx['<unk>'] = 0
+    idx_2_word[0] = '<unk>'
+
     with open('word_2_idx.pkl', 'wb') as f:
         pickle.dump(word_2_idx, f)
 
@@ -72,7 +76,7 @@ def tokenize():
             ).split(' ')) + '\n' for line in f)
             with open(file[:-4], 'w') as f:
                 f.writelines(lines)
-        
+
         with open(file, 'r') as f:
             tokens = [[word_2_idx[word] if word in word_2_idx else 0 for word in line.strip(
             ).split(' ')] for line in f]
@@ -85,7 +89,7 @@ def tokenize():
 def reconstruct(csv_file):
     with open('idx_2_word.pkl', 'rb') as f:
         idx_2_word = pickle.load(f)
-    
+
     df = pd.read_csv(csv_file, header=None)
 
     lines = (' '.join(idx_2_word[idx] if idx in idx_2_word else '<unk>' for idx in list(row)) + '\n'

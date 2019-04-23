@@ -129,7 +129,7 @@ with tf.Session() as sess:
     sess.run(init)
 
     saver = tf.train.Saver()
-	x_val = training_data()
+    x_val = training_data()
 
     for epoch in range(epochs):
         iterations = len(x_val) // batch_size
@@ -149,7 +149,7 @@ with tf.Session() as sess:
 
 
     # testing part
-	saver = tf.train.Saver()
+    saver = tf.train.Saver()
     saver.restore(sess, tf.train.latest_checkpoint('./savedC'))
 
     x_val = testing_data()

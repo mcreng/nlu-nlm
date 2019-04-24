@@ -130,7 +130,7 @@ with tf.Session() as sess:
     for epoch in range(epochs):
         iterations = len(x_val) // batch_size
         for i in range(iterations):
-            x_batch = x_val[np.random.choice(num_vocab, batch_size)]
+            x_batch = x_val[np.random.choice(len(x_val), batch_size)]
             x_batch = x_batch.reshape(batch_size * timesteps)
 
             pretrained_embeddings = full_embeddings[x_batch]

@@ -66,7 +66,7 @@ lstm = tf.nn.rnn_cell.LSTMCell(num_units=num_units,
                                initializer=tf.contrib.layers.xavier_initializer())
 
 X = tf.placeholder(tf.int32, [batch_size, timesteps])
-embedding = tf.placeholder(tf.float32, [batch_size,timesteps,embedding_dim])
+embedding = tf.placeholder(tf.float32, [batch_size, timesteps, embedding_dim])
 
 x = tf.unstack(embedding, timesteps, 1)
 

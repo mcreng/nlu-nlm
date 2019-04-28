@@ -6,7 +6,7 @@ import tensorflow as tf
 
 
 ## Constants ##
-epochs = 1
+epochs = 3
 num_units = 512
 batch_size = 64
 timesteps = 30

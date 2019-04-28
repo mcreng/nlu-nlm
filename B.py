@@ -11,7 +11,7 @@ load_embedding = LE.load_embedding
 
 
 ## Constants ##
-epochs = 5
+epochs = 1
 num_units = 512
 batch_size = 64
 timesteps = 30
